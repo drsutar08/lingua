@@ -1,0 +1,13 @@
+{
+  "name": "lingua-tutor-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "tutor.mjs",
+  "scripts": {
+    "start": "node tutor.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.11.0"
+  }
+}

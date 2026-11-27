@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lingua Screen Gallery</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: a contact sheet of phone screens, grouped by flow, with a sticky jump bar */
+:root {
+  --bg: #F6F4FE; --surface: #FFFFFF; --ink: #1B1838; --muted: #6E6A8A; --line: #E4E0F5; --accent: #7B61F0; --accent-soft: #EEEAFE;
+  --font: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0E0C1B; --surface: #1B1830; --ink: #EEEBFF; --muted: #A39EC4; --line: #2E2A4A; --accent: #9A85FF; --accent-soft: #2C2652; color-scheme: dark } }
+:root[data-theme="dark"] { --bg: #0E0C1B; --surface: #1B1830; --ink: #EEEBFF; --muted: #A39EC4; --line: #2E2A4A; --accent: #9A85FF; --accent-soft: #2C2652; color-scheme: dark }
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 15px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 64px }
+.wrap { max-width: 1240px; margin: 0 auto }
+.top { padding-block: 40px 18px; display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: end; justify-content: space-between }
+.brand { display: flex; gap: 14px; align-items: center }
+.logo { width: 48px; height: 48px; border-radius: 14px; background: linear-gradient(135deg, #A08CF8, #6A4FE6); display: grid; place-items: center; flex: none }
+h1 { font-size: clamp(26px, 4vw, 36px); font-weight: 800; letter-spacing: -0.02em; margin: 0; text-wrap: balance }
+.top p { margin: 2px 0 0; color: var(--muted) }
+.meta { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg) }
+nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 10px; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; border-bottom: 1px solid var(--line) }
+nav a { flex: none; text-decoration: none; color: var(--ink); font-weight: 600; font-size: 13px; padding: 7px 12px; border-radius: 99px; background: var(--surface); border: 1px solid var(--line) }
+nav a:hover, nav a:focus-visible { border-color: var(--accent); color: var(--accent); outline: none }
+section { padding-top: 36px; scroll-margin-top: 64px }
+.sec { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin-bottom: 16px }
+.sec h2 { font-size: 20px; font-weight: 800; margin: 0; letter-spacing: -0.01em }
+.sec p { margin: 0; color: var(--muted); font-size: 14px; flex: 1 1 260px; min-width: 0 }
+.count { order: -1; font-size: 12px; font-weight: 700; color: var(--accent); background: var(--accent-soft); border-radius: 99px; padding: 2px 9px; font-variant-numeric: tabular-nums }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 190px), 1fr)); gap: 22px 18px }
+figure { margin: 0; display: flex; flex-direction: column; gap: 8px; min-width: 0 }
+.shot { display: block; padding: 0; border: 1px solid var(--line); border-radius: 22px; overflow: hidden; background: var(--surface); cursor: zoom-in;
+  box-shadow: 0 8px 24px rgba(76, 56, 170, 0.08); transition: transform .15s ease, box-shadow .15s ease }
+.shot:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(76, 56, 170, 0.16) }
+.shot:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px }
+.shot img { display: block; width: 100%; height: auto; aspect-ratio: 390 / 844; object-fit: cover; object-position: top }
+figcaption { display: flex; flex-direction: column; font-size: 13px; line-height: 1.35 }
+figcaption b { font-weight: 700 }
+figcaption span { color: var(--muted) }
+dialog { border: 0; padding: 0; background: transparent; max-width: 96vw; max-height: 94vh }
+dialog::backdrop { background: rgba(14, 12, 27, 0.78) }
+dialog img { display: block; max-height: 90vh; max-width: 92vw; width: auto; border-radius: 26px }
+dialog .close { position: fixed; top: calc(14px + env(safe-area-inset-top, 0px)); right: max(14px, env(safe-area-inset-right, 0px)); width: 42px; height: 42px; border-radius: 50%; border: 0;
+  background: #fff; color: #1B1838; font: 700 20px var(--font); cursor: pointer }
+dialog .close:focus-visible { outline: 3px solid var(--accent) }
+@media (prefers-reduced-motion: reduce) { .shot { transition: none } .shot:hover { transform: none } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="brand">
+      <div class="logo" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="3.9" ry="9"/><path d="M3 12h18M4.6 7.2c4.6 1.6 10.2 1.6 14.8 0M4.6 16.8c4.6-1.6 10.2-1.6 14.8 0"/></svg></div>
+      <div><h1>Lingua screens</h1><p>Every screen of the app, captured from the running web build at iPhone size.</p></div>
+    </div>
+    <div class="meta">59 screens · demo login demo@lingua.app</div>
+  </div>
+  <nav aria-label="Sections"><a href="#first-launch">First launch</a><a href="#log-in-sign-up">Log in &amp; sign up</a><a href="#new-learner-setup">New learner setup</a><a href="#learn">Learn</a><a href="#practice-progress-profile">Practice, Progress, Profile</a><a href="#lessons">Lessons</a><a href="#finishing-a-lesson">Finishing a lesson</a><a href="#spaced-review">Spaced review</a><a href="#scripts-pronunciation-guides">Scripts &amp; pronunciation guides</a><a href="#ai-conversation">AI conversation</a><a href="#sheets">Sheets</a><a href="#dark-mode">Dark mode</a><a href="#accessibility">Accessibility</a></nav>
+  <section id="first-launch"><header class="sec"><h2>First launch</h2><p>Splash, then the three-page intro (shown once per device).</p><span class="count">4</span></header><div class="grid"><figure><button class="shot" type="button" aria-label="Enlarge Splash"><img src="screenshots/01-splash.png" alt="Splash" loading="lazy" width="390" height="844"></button><figcaption><b>Splash</b><span>Animated logo; matches the native splash</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Intro 1"><img src="screenshots/02-intro-1.png" alt="Intro 1" loading="lazy" width="390" height="844"></button><figcaption><b>Intro 1</b><span>Learn Languages, Open Worlds</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Intro 2"><img src="screenshots/03-intro-2.png" alt="Intro 2" loading="lazy" width="390" height="844"></button><figcaption><b>Intro 2</b><span>Practice Speaking</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Intro 3"><img src="screenshots/04-intro-3.png" alt="Intro 3" loading="lazy" width="390" height="844"></button><figcaption><b>Intro 3</b><span>Track progress and earn rewards</span></figcaption></figure></div></section>
+<section id="log-in-sign-up"><header class="sec"><h2>Log in &amp; sign up</h2><p>Accounts stay on the device. The demo button fills in the demo login.</p><span class="count">3</span></header><div class="grid"><figure><button class="shot" type="button" aria-label="Enlarge Log in"><img src="screenshots/05-login.png" alt="Log in" loading="lazy" width="390" height="844"></button><figcaption><b>Log in</b><span>With the demo account shortcut</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Sign up"><img src="screenshots/06-signup.png" alt="Sign up" loading="lazy" width="390" height="844"></button><figcaption><b>Sign up</b><span>Back arrow returns to log in</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Validation"><img src="screenshots/07-signup-errors.png" alt="Validation" loading="lazy" width="390" height="844"></button><figcaption><b>Validation</b><span>Field-by-field errors</span></figcaption></figure></div></section>
+<section id="new-learner-setup"><header class="sec"><h2>New learner setup</h2><p>Runs once after sign-up.</p><span class="count">7</span></header><div class="grid"><figure><button class="shot" type="button" aria-label="Enlarge Pick a language"><img src="screenshots/08-setup-language.png" alt="Pick a language" loading="lazy" width="390" height="844"></button><figcaption><b>Pick a language</b><span>16 languages</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge How should we address you?"><img src="screenshots/09-setup-gender.png" alt="How should we address you?" loading="lazy" width="390" height="844"></button><figcaption><b>How should we address you?</b><span>Picks the right word forms</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Daily goal"><img src="screenshots/10-setup-goal.png" alt="Daily goal" loading="lazy" width="390" height="844"></button><figcaption><b>Daily goal</b><span>Casual to Intense</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Starting point"><img src="screenshots/11-setup-level.png" alt="Starting point" loading="lazy" width="390" height="844"></button><figcaption><b>Starting point</b><span>From scratch or placement test</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Placement test"><img src="screenshots/12-placement.png" alt="Placement test" loading="lazy" width="390" height="844"></button><figcaption><b>Placement test</b><span>One question per unit</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Placement result"><img src="screenshots/13-placement-result.png" alt="Placement result" loading="lazy" width="390" height="844"></button><figcaption><b>Placement result</b><span>Starts you at the right unit</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge First Learn screen"><img src="screenshots/14-learn-new.png" alt="First Learn screen" loading="lazy" width="390" height="844"></button><figcaption><b>First Learn screen</b><span>Fresh progress, French course</span></figcaption></figure></div></section>
+<section id="learn"><header class="sec"><h2>Learn</h2><p>Language switcher, today’s goal, quests and review, the next lesson, and the whole learning path.</p><span class="count">7</span></header><div class="grid"><figure><button class="shot" type="button" aria-label="Enlarge Learn"><img src="screenshots/15-learn.png" alt="Learn" loading="lazy" width="390" height="844"></button><figcaption><b>Learn</b><span>Up next, Today card, your path</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Daily quests"><img src="screenshots/16-learn-quests.png" alt="Daily quests" loading="lazy" width="390" height="844"></button><figcaption><b>Daily quests</b><span>Tap the quests ring to expand</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Your path"><img src="screenshots/17-learn-path.png" alt="Your path" loading="lazy" width="390" height="844"></button><figcaption><b>Your path</b><span>Done units fold away; the current unit is open</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Grammar tip"><img src="screenshots/18-sheet-tip.png" alt="Grammar tip" loading="lazy" width="390" height="844"></button><figcaption><b>Grammar tip</b><span>From the Tip button on each unit</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Your languages"><img src="screenshots/19-sheet-languages.png" alt="Your languages" loading="lazy" width="390" height="844"></button><figcaption><b>Your languages</b><span>Switch course or add one</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Add a language"><img src="screenshots/20-add-language.png" alt="Add a language" loading="lazy" width="390" height="844"></button><figcaption><b>Add a language</b><span>Popular first, View all for 16</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Start a course"><img src="screenshots/21-add-language-pick.png" alt="Start a course" loading="lazy" width="390" height="844"></button><figcaption><b>Start a course</b><span>Unit 1 or placement test</span></figcaption></figure></div></section>
+<section id="practice-progress-profile"><header class="sec"><h2>Practice, Progress, Profile</h2><p>The other three tabs.</p><span class="count">6</span></header><div class="grid"><figure><button class="shot" type="button" aria-label="Enlarge Practice"><img src="screenshots/22-practice.png" alt="Practice" loading="lazy" width="390" height="844"></button><figcaption><b>Practice</b><span>Review, skill drills, AI conversations</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Progress"><img src="screenshots/23-progress.png" alt="Progress" loading="lazy" width="390" height="844"></button><figcaption><b>Progress</b><span>Level, streak week, XP</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Progress (lower)"><img src="screenshots/24-progress-lower.png" alt="Progress (lower)" loading="lazy" width="390" height="844"></button><figcaption><b>Progress (lower)</b><span>Stats, daily quests, badges</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Profile"><img src="screenshots/25-profile.png" alt="Profile" loading="lazy" width="390" height="844"></button><figcaption><b>Profile</b><span>Account, stats, library</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Settings"><img src="screenshots/26-profile-settings.png" alt="Settings" loading="lazy" width="390" height="844"></button><figcaption><b>Settings</b><span>Word forms, reminders, sound, text size</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Account settings"><img src="screenshots/27-profile-account.png" alt="Account settings" loading="lazy" width="390" height="844"></button><figcaption><b>Account settings</b><span>Change password, log out, delete</span></figcaption></figure></div></section>
+<section id="lessons"><header class="sec"><h2>Lessons</h2><p>Every Learn lesson opens with its grammar tip, then mixes these exercise types.</p><span class="count">9</span></header><div class="grid"><figure><button class="shot" type="button" aria-label="Enlarge Tip before a lesson"><img src="screenshots/28-lesson-tip.png" alt="Tip before a lesson" loading="lazy" width="390" height="844"></button><figcaption><b>Tip before a lesson</b><span>French: tu and vous</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Build the sentence"><img src="screenshots/29-ex-build.png" alt="Build the sentence" loading="lazy" width="390" height="844"></button><figcaption><b>Build the sentence</b><span>Tap word tiles in order</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Multiple choice"><img src="screenshots/30-ex-choice.png" alt="Multiple choice" loading="lazy" width="390" height="844"></button><figcaption><b>Multiple choice</b><span>Pick the meaning</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Match the pairs"><img src="screenshots/31-ex-match.png" alt="Match the pairs" loading="lazy" width="390" height="844"></button><figcaption><b>Match the pairs</b><span>Tap a word, then its meaning</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Fill in the blank"><img src="screenshots/32-ex-fill.png" alt="Fill in the blank" loading="lazy" width="390" height="844"></button><figcaption><b>Fill in the blank</b><span>Choose the missing word</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Type the answer"><img src="screenshots/33-ex-type.png" alt="Type the answer" loading="lazy" width="390" height="844"></button><figcaption><b>Type the answer</b><span>Small typos are forgiven</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Listen and type"><img src="screenshots/34-ex-dictation.png" alt="Listen and type" loading="lazy" width="390" height="844"></button><figcaption><b>Listen and type</b><span>With slow playback</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Speaking: try again"><img src="screenshots/35-ex-speak-retry.png" alt="Speaking: try again" loading="lazy" width="390" height="844"></button><figcaption><b>Speaking: try again</b><span>Below 60 offers a retry</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Speaking: pass"><img src="screenshots/36-ex-speak-pass.png" alt="Speaking: pass" loading="lazy" width="390" height="844"></button><figcaption><b>Speaking: pass</b><span>Score 100, word-by-word colours</span></figcaption></figure></div></section>
+<section id="finishing-a-lesson"><header class="sec"><h2>Finishing a lesson</h2><span class="count">2</span></header><div class="grid"><figure><button class="shot" type="button" aria-label="Enlarge Perfect lesson"><img src="screenshots/37-lesson-complete.png" alt="Perfect lesson" loading="lazy" width="390" height="844"></button><figcaption><b>Perfect lesson</b><span>XP, bonus for no mistakes, new words</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Celebration"><img src="screenshots/38-celebration.png" alt="Celebration" loading="lazy" width="390" height="844"></button><figcaption><b>Celebration</b><span>Badge unlocked, with confetti</span></figcaption></figure></div></section>
+<section id="spaced-review"><header class="sec"><h2>Spaced review</h2><p>Words come back right before you would forget them.</p><span class="count">3</span></header><div class="grid"><figure><button class="shot" type="button" aria-label="Enlarge Review question"><img src="screenshots/39-review.png" alt="Review question" loading="lazy" width="390" height="844"></button><figcaption><b>Review question</b><span>Due words, mixed exercise types</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Review: type it"><img src="screenshots/40-review-type.png" alt="Review: type it" loading="lazy" width="390" height="844"></button><figcaption><b>Review: type it</b><span>Recall the meaning</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Review complete"><img src="screenshots/41-review-complete.png" alt="Review complete" loading="lazy" width="390" height="844"></button><figcaption><b>Review complete</b><span>Earns a heart back</span></figcaption></figure></div></section>
+<section id="scripts-pronunciation-guides"><header class="sec"><h2>Scripts &amp; pronunciation guides</h2><p>Guides in Latin letters under every phrase in languages that use other alphabets.</p><span class="count">7</span></header><div class="grid"><figure><button class="shot" type="button" aria-label="Enlarge Japanese tip"><img src="screenshots/42-ja-tip.png" alt="Japanese tip" loading="lazy" width="390" height="844"></button><figcaption><b>Japanese tip</b><span>です makes it polite</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Japanese"><img src="screenshots/43-ja-romaji.png" alt="Japanese" loading="lazy" width="390" height="844"></button><figcaption><b>Japanese</b><span>Kana with romaji</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Chinese"><img src="screenshots/44-zh-match.png" alt="Chinese" loading="lazy" width="390" height="844"></button><figcaption><b>Chinese</b><span>Pinyin with tone marks</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Korean"><img src="screenshots/45-ko-match.png" alt="Korean" loading="lazy" width="390" height="844"></button><figcaption><b>Korean</b><span>Revised Romanization</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Hindi"><img src="screenshots/46-hi-match.png" alt="Hindi" loading="lazy" width="390" height="844"></button><figcaption><b>Hindi</b><span>Noto Sans Devanagari</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Russian"><img src="screenshots/47-ru-match.png" alt="Russian" loading="lazy" width="390" height="844"></button><figcaption><b>Russian</b><span>Cyrillic with transliteration</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Arabic"><img src="screenshots/48-ar-match.png" alt="Arabic" loading="lazy" width="390" height="844"></button><figcaption><b>Arabic</b><span>Right to left, romanized</span></figcaption></figure></div></section>
+<section id="ai-conversation"><header class="sec"><h2>AI conversation</h2><p>Needs the tutor server running with an Anthropic API key. Captured without it, so it shows the setup message.</p><span class="count">1</span></header><div class="grid"><figure><button class="shot" type="button" aria-label="Enlarge Role-play scene"><img src="screenshots/49-tutor.png" alt="Role-play scene" loading="lazy" width="390" height="844"></button><figcaption><b>Role-play scene</b><span>Scene card, chat input, mic</span></figcaption></figure></div></section>
+<section id="sheets"><header class="sec"><h2>Sheets</h2><span class="count">5</span></header><div class="grid"><figure><button class="shot" type="button" aria-label="Enlarge Hearts"><img src="screenshots/50-sheet-hearts.png" alt="Hearts" loading="lazy" width="390" height="844"></button><figcaption><b>Hearts</b><span>Refill timer, review for a heart</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Streak"><img src="screenshots/51-sheet-streak.png" alt="Streak" loading="lazy" width="390" height="844"></button><figcaption><b>Streak</b><span>Freezes and how to earn them</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Achievements"><img src="screenshots/52-sheet-achievements.png" alt="Achievements" loading="lazy" width="390" height="844"></button><figcaption><b>Achievements</b><span>10 badges with progress</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Edit profile"><img src="screenshots/53-sheet-edit-profile.png" alt="Edit profile" loading="lazy" width="390" height="844"></button><figcaption><b>Edit profile</b><span>Name; email is the login</span></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Change password"><img src="screenshots/54-sheet-change-password.png" alt="Change password" loading="lazy" width="390" height="844"></button><figcaption><b>Change password</b><span>Current + new password</span></figcaption></figure></div></section>
+<section id="dark-mode"><header class="sec"><h2>Dark mode</h2><p>Light is the default; switch on the Profile tab.</p><span class="count">4</span></header><div class="grid"><figure><button class="shot" type="button" aria-label="Enlarge Learn"><img src="screenshots/55-dark-learn.png" alt="Learn" loading="lazy" width="390" height="844"></button><figcaption><b>Learn</b></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Practice"><img src="screenshots/56-dark-practice.png" alt="Practice" loading="lazy" width="390" height="844"></button><figcaption><b>Practice</b></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Match the pairs"><img src="screenshots/57-dark-match.png" alt="Match the pairs" loading="lazy" width="390" height="844"></button><figcaption><b>Match the pairs</b></figcaption></figure>
+<figure><button class="shot" type="button" aria-label="Enlarge Progress"><img src="screenshots/58-dark-progress.png" alt="Progress" loading="lazy" width="390" height="844"></button><figcaption><b>Progress</b></figcaption></figure></div></section>
+<section id="accessibility"><header class="sec"><h2>Accessibility</h2><span class="count">1</span></header><div class="grid"><figure><button class="shot" type="button" aria-label="Enlarge Extra-large text"><img src="screenshots/59-large-text.png" alt="Extra-large text" loading="lazy" width="390" height="844"></button><figcaption><b>Extra-large text</b><span>All text scales with the setting</span></figcaption></figure></div></section>
+</div>
+<dialog id="viewer" aria-label="Screenshot"><button class="close" type="button" aria-label="Close">×</button><img alt=""></dialog>
+<script>
+  const dlg = document.getElementById('viewer');
+  const big = dlg.querySelector('img');
+  document.querySelectorAll('.shot').forEach((b) => b.addEventListener('click', () => {
+    const img = b.querySelector('img');
+    big.src = img.src; big.alt = img.alt;
+    dlg.showModal();
+  }));
+  dlg.querySelector('.close').addEventListener('click', () => dlg.close());
+  dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+{
+  "expo": {
+    "name": "Lingua",
+    "slug": "lingua",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "backgroundColor": "#F6F4FE",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.example.lingua",
+      "icon": "./assets/icon.png"
+    },
+    "android": {
+      "package": "com.example.lingua",
+      "edgeToEdgeEnabled": true,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundImage": "./assets/adaptive-icon-bg.png",
+        "monochromeImage": "./assets/adaptive-icon-mono.png",
+        "backgroundColor": "#7B61F0"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-font",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 220,
+          "resizeMode": "contain",
+          "backgroundColor": "#7B61F0",
+          "dark": {
+            "image": "./assets/splash-icon.png",
+            "backgroundColor": "#5B43D6"
+          }
+        }
+      ],
+      [
+        "expo-speech-recognition",
+        {
+          "microphonePermission": "Lingua uses the microphone so you can practise speaking and get a pronunciation score.",
+          "speechRecognitionPermission": "Lingua turns your speech into text to score your pronunciation.",
+          "androidSpeechServicePackages": [
+            "com.google.android.googlequicksearchbox"
+          ]
+        }
+      ],
+      "expo-audio",
+      "expo-asset"
+    ]
+  }
+}
