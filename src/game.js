@@ -3,11 +3,14 @@
 
 export const DAY = 24 * 3600 * 1000;
 
+// Local calendar date as YYYY-MM-DD. Built from local fields: toISOString() would give the UTC date,
+// which is a day behind for UTC+13 and beyond (New Zealand in summer, Tonga, Samoa, Kiribati).
 export function dayKey(offset = 0, from = Date.now()) {
   const d = new Date(from);
   d.setHours(12, 0, 0, 0);
   d.setDate(d.getDate() + offset);
-  return d.toISOString().slice(0, 10);
+  const pad = (n) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
 }
 const daysBetween = (a, b) => Math.round((new Date(b + 'T12:00:00') - new Date(a + 'T12:00:00')) / DAY);
 

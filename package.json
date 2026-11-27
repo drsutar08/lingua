@@ -7,7 +7,8 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "test": "node --test --disable-warning=MODULE_TYPELESS_PACKAGE_JSON \"test/**/*.test.mjs\""
   },
   "dependencies": {
     "@expo-google-fonts/noto-sans-devanagari": "^0.4.2",
